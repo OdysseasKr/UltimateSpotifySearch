@@ -1,0 +1,64 @@
+body {
+background-color: #EEEFED;
+color: #2B2E34;
+text-align: center;
+}
+
+img {
+border: 2px solid #7CC646;
+border-radius: 20px;
+height: 80%;
+margin: 5px;
+}
+
+form {
+width: 150px;
+text-align: left;
+margin: auto;
+}
+
+p {
+margin: 0px;
+padding: 0px;
+}
+
+#notifier {
+color: #579926;
+font-weight: bold;
+font-size: 1.2em;
+opacity: 0;
+}
+
+#saveButton {
+margin: 10px 0px;
+}
+
+#credit {
+box-shadow: inset 0px 0px 5px rgba(0,0,0,0.5);
+border-radius: 20px;
+width: 500px;
+margin: 10px auto;
+}
+
+a:link {
+color: #579926;
+font-weight: bold;
+}
+
+a:visited {
+color: #579926;
+font-weight: bold;
+}
+
+.logo {
+border: 0px;
+border-radius: 0px;
+height: 100%
+}
+
+.settings {
+border: 2px solid #7CC646;
+border-radius: 20px;
+width: 400px;
+margin: auto;
+}
