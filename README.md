@@ -1,6 +1,7 @@
-# UltimateSpotifySearch-Chrome
+# Ultimate Spotify Search for Chrome
+![logo](https://raw.githubusercontent.com/OdysseasKr/UltimateSpotifySearch-Chrome/master/icons/icon64.png)
+
 Repository for the Ultimate Spotify Search add-on for Chrome and Opera
- ![logo](https://raw.githubusercontent.com/OdysseasKr/UltimateSpotifySearch-Chrome/master/icons/icon64.png)
 
 - Simplifies search on Spotify.
 - Adds launchers on Youtube, Soundcloud, Bandcamp.
