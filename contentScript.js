@@ -54,14 +54,14 @@ var PATTERN = [
 ];
 
 /*
- * Filters the given string using PATTERN 
+ * Filters the given string using PATTERN
  */
 function filterText(text) {
     for (var i = 0; i < PATTERN.length; i++) {
         text = text.replace(PATTERN[i], "");
     }
     text.replace(' ')
-    
+
     return text;
 }
 
@@ -84,7 +84,7 @@ function spotifyButton(title) {
         openURI(title);
     });
     btn.style.cursor = "pointer";
-    
+
     return btn;
 }
 
@@ -92,17 +92,12 @@ function spotifyButton(title) {
 /*
  * Adds the button on youtube
  */
-function youtubeButton() {
+
+function injectYTOldDesign() {
     if (document.location.href.search("youtube.com/watch") == -1 ||
-        document.getElementById("spotifyButton") ||
-        !document.getElementById("watch-header")) {
-     
+        !document.getElementById("watch-header") ||
+        document.getElementById("spotifyButton"))
         return;
-    }
-
-    // Find the headline
-    var referenceObj = document.getElementById("watch-headline-title");
-
     // Button creation, styling and positioning
     var spotifyButton = document.createElement("div");
     spotifyButton.className = "yt-uix-menu";
@@ -138,13 +133,76 @@ function youtubeButton() {
     });
 }
 
+function injectYTMaterialDesign() {
+    if (document.location.href.search("youtube.com/watch") == -1 ||
+        !document.getElementById("top-level-buttons") ||
+        document.getElementById("spotifyButton"))
+        return;
+    // Button creation, styling and positioning
+    var spotifyButton = document.createElement("ytd-button-renderer");
+    spotifyButton.id = "spotifyButton";
+    spotifyButton.className = "style-scope ytd-menu-renderer style-default";
+    spotifyButton.setAttribute("is","ytd-button-renderer")
+    spotifyButton.setAttribute("button-renderer","")
+    spotifyButton.setAttribute("is-icon-button","")
+    spotifyButton.style.border = "1px solid #8dbe00";
+    spotifyButton.style.borderRadius = "5px";
+
+    var anchor  = document.createElement("a");
+    anchor.setAttribute("is", "yt-endpoint");
+    anchor.setAttribute("tabindex", "-1");
+    anchor.className = "style-scope ytd-button-renderer";
+
+    var subButton = document.createElement("button");
+    subButton.className = "style-scope ytd-toggle-button-renderer style-text";
+    subButton.setAttribute("is","paper-icon-button-light");
+    subButton.setAttribute("aria-label", "Search on Spotify");
+
+    var icon = document.createElement("img")
+    icon.style.width = "100%"
+    icon.src = chrome.extension.getURL("icons/icon32-material.png");
+
+    subButton.appendChild(icon)
+    anchor.appendChild(subButton);
+    spotifyButton.appendChild(anchor);
+    try{
+        document.getElementById("top-level-buttons").appendChild(spotifyButton);
+
+        // Set the onclick attribute
+        spotifyButton.addEventListener("click", function () {
+            var title = document.getElementsByClassName("title")[0].textContent,
+                cleanTitle = filterText(title);
+
+            openURI(cleanTitle);
+        });
+    } catch(e) {}
+}
+
+function youtubeButton() {
+    // Check which design is used
+    if (document.getElementById("page-container")) { // Previous Design
+        injectYTOldDesign();
+        var observer = new MutationObserver(function(mutations) {
+            injectYTOldDesign();
+        });
+        observer.observe(document.getElementById("page-container"), { subtree: true, childList: true });
+    } else { // Material Design
+        setTimeout(function () {
+            injectYTMaterialDesign();
+            document.addEventListener('transitionend', function(e) {
+            if (e.target.id === 'progress')
+                setTimeout(function () {
+                    injectYTMaterialDesign();
+                },1000);
+            });
+        }, 2000);
+    }
+
+}
+
 // When the page loads, add the button and the listener
 if (document.location.href.search("youtube.com") > -1) {
     youtubeButton();
-    var observer = new MutationObserver(function(mutations) {
-        youtubeButton();
-    });
-    observer.observe(document.getElementById("page-container"), { subtree: true, childList: true });
 }
 
 //========================= SOUNDCLOUD ===========================
@@ -153,7 +211,7 @@ var soundcloudAdded = false;
 // Adds the button on soundcloud
 function soundcloudButton() {
     var titles = document.getElementsByClassName("soundTitle__title");
-    
+
     if (titles.length != 0) {
         for (var i = 0; i < titles.length; i++) {
             if (titles[i].parentNode.lastChild.className != "spotifyButton") {
@@ -162,7 +220,7 @@ function soundcloudButton() {
             }
         }
     }
-    
+
     soundcloudAdded = false;
 }
 
