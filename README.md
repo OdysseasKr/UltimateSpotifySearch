@@ -10,7 +10,7 @@ Repository for the Ultimate Spotify Search add-on for Firefox, Chrome and Opera
 Chrome Webstore:
 https://chrome.google.com/webstore/detail/ultimate-spotify-search/onfokaolkiohldbhglpekajglkhijhlf
 
-Firefox Add-ons:
+Firefox Add-ons (Not compatible with Youtube Material Design yet):
 https://addons.mozilla.org/en-US/firefox/addon/ultimate-spotify-search/
 
 Opera Add-ons:
