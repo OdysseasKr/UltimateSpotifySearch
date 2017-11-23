@@ -142,8 +142,9 @@ function injectYTMaterialDesign() {
     var spotifyButton = document.createElement("ytd-button-renderer");
     spotifyButton.id = "spotifyButton";
     spotifyButton.className = "style-scope ytd-menu-renderer style-default";
-    spotifyButton.setAttribute("is","ytd-button-renderer")
+    //spotifyButton.setAttribute("is","ytd-button-renderer")
     spotifyButton.setAttribute("button-renderer","")
+    spotifyButton.setAttribute("has-no-text","")
     spotifyButton.setAttribute("is-icon-button","")
     spotifyButton.style.border = "1px solid #8dbe00";
     spotifyButton.style.borderRadius = "5px";
@@ -155,6 +156,10 @@ function injectYTMaterialDesign() {
 
     var subButton = document.createElement("button");
     subButton.className = "style-scope ytd-toggle-button-renderer style-text";
+    subButton.style.width = "100%";
+    subButton.style.boxSizing = "border-box";
+    subButton.style.padding = "20%";
+//    subButton.style.margin = "0px auto";
     subButton.setAttribute("is","paper-icon-button-light");
     subButton.setAttribute("aria-label", "Search on Spotify");
 
