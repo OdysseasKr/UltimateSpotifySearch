@@ -34,8 +34,6 @@ p {
 }
 
 #credit {
-    box-shadow: inset 0px 0px 5px rgba(0,0,0,0.5);
-    border-radius: 20px;
     width: 500px;
     margin: 10px auto;
 }
