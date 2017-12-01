@@ -24,17 +24,17 @@
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*", "*://*.soundcloud.com/*", "*://*.bandcamp.com/*"],
-      "js": ["contentScript.js"],
+      "js": ["js/contentScript.js"],
       "run_at": "document_end"
     }
   ],
 
   "background" : {
     "scripts": [
-                "background.js"
+                "js/background.js"
                ],
     "persistent": false
   },
 
-  "options_page": "extensionPages/settings.html"
+  "options_page": "settings/settings.html"
 }

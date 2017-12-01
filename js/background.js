@@ -17,7 +17,7 @@
 // On install
 chrome.runtime.onInstalled.addListener(function () {
 	// Opens the first run page
-	chrome.tabs.create({url: "extensionPages/firstRun.html"});
+	chrome.tabs.create({url: "firstRun/firstRun.html"});
 
 	// Adds the context menu item
 	chrome.contextMenus.create({
