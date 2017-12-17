@@ -17,7 +17,7 @@
 // On install
 chrome.runtime.onInstalled.addListener(function () {
 	// Opens the first run page
-	chrome.tabs.create({url: "firstRun/firstRun.html"});
+	chrome.tabs.create({url: "settings/settings.html"});
 
 	// Adds the context menu item
 	chrome.contextMenus.create({
@@ -27,15 +27,15 @@ chrome.runtime.onInstalled.addListener(function () {
 	});
 
 	// Sets the default setting for the search target
-	chrome.storage.sync.set({"ultimateSpotifyButton": 1});
+	chrome.storage.local.set({"ultimateSpotifyButton": 1});
 });
 
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
-	chrome.storage.sync.get("ultimateSpotifyButton", function (result) {
+	chrome.storage.local.get("ultimateSpotifyButton", function (result) {
 		if (result.ultimateSpotifyButton == 1) {
 			chrome.tabs.update(tab.id, {url: "spotify:search:\"" + info.selectionText + "\""});
 		} else {
-			chrome.tabs.create({url: "https://play.spotify.com/search/" + info.selectionText});
+			chrome.tabs.create({url: "https://open.spotify.com/search/results/" + info.selectionText});
 		}
 	});
 });
@@ -43,14 +43,42 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	// If the message is send by the settings page
 	if (request.target >= 0) {
-		chrome.storage.sync.set({"ultimateSpotifyButton": request.target});
+		chrome.storage.local.set({"ultimateSpotifyButton": request.target});
 	} else { // If the message is send by a content script
-		chrome.storage.sync.get("ultimateSpotifyButton", function (result) {
+		chrome.storage.local.get("ultimateSpotifyButton", function (result) {
 			if (result.ultimateSpotifyButton == 1) {
-				chrome.tabs.update(sender.tab.id, {url: "spotify:search:\"" + request.terms + "\""});
+				chrome.tabs.update(sender.tab.id, {url: "spotify:search:" + request.terms});
+				console.log("spotify:search:\"" + request.terms + "\"")
 			} else {
-				chrome.tabs.create({url: "https://play.spotify.com/search/" + request.terms});
+				chrome.tabs.create({url: "https://open.spotify.com/search/results/" + request.terms});
 			}
+		});
+	}
+});
+
+// New page load listener
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+	var taburl = tab.url;
+	var youtubeRegex = RegExp(/.*:\/\/(www\.)?youtube\.com\/watch.*/);
+	var soundcloudRegex = RegExp(/.*:\/\/(www\.)?soundcloud\.com.*/);
+	var bandcampRegex = RegExp(/.*:\/\/.*\.bandcamp\.com.*/);
+	if (youtubeRegex.test(taburl)) {
+		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery.min.js", runAt:"document_end"}, function () {
+			chrome.tabs.executeScript(tab.id, {file:"js/textfiltering.js", runAt:"document_end"}, function () {
+				chrome.tabs.executeScript(tab.id, {file:"js/youtube.js", runAt:"document_end"});
+			});
+		});
+	} else if (soundcloudRegex.test(taburl)) {
+		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery.min.js", runAt:"document_end"}, function () {
+			chrome.tabs.executeScript(tab.id, {file:"js/textfiltering.js", runAt:"document_end"}, function () {
+				chrome.tabs.executeScript(tab.id, {file:"js/soundcloud.js", runAt:"document_end"});
+			});
+		});
+	} else if (bandcampRegex.test(taburl)) {
+		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery.min.js", runAt:"document_end"}, function () {
+			chrome.tabs.executeScript(tab.id, {file:"js/textfiltering.js", runAt:"document_end"}, function () {
+				chrome.tabs.executeScript(tab.id, {file:"js/bandcamp.js", runAt:"document_end"});
+			});
 		});
 	}
 });

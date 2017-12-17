@@ -15,7 +15,7 @@
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
 // Load values
-chrome.storage.sync.get("ultimateSpotifyButton", function (result) {
+chrome.storage.local.get("ultimateSpotifyButton", function (result) {
 	if (result.ultimateSpotifyButton == 1) {
 		document.getElementById("desktopTarget").checked = true;
 	} else {

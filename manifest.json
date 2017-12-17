@@ -1,6 +1,6 @@
 {
   "name": "Ultimate Spotify Search",
-  "version": "2",
+  "version": "2.0",
   "manifest_version": 2,
   "description": "Simplifies search on Spotify with launchers on popular sites and search from right-click",
 
@@ -8,7 +8,10 @@
     "contextMenus",
     "tabs",
     "storage",
-    "*://play.spotify.com/*"
+    "*://play.spotify.com/*",
+    "*://*.youtube.com/*",
+    "*://*.soundcloud.com/*",
+    "*://*.bandcamp.com/*"
   ],
 
   "icons": {
@@ -21,14 +24,6 @@
     "icons/*.png"
   ],
 
-  "content_scripts": [
-    {
-      "matches": ["*://*.youtube.com/*", "*://*.soundcloud.com/*", "*://*.bandcamp.com/*"],
-      "js": ["js/contentScript.js"],
-      "run_at": "document_end"
-    }
-  ],
-
   "background" : {
     "scripts": [
                 "js/background.js"
@@ -36,5 +31,8 @@
     "persistent": false
   },
 
-  "options_page": "settings/settings.html"
+  "options_ui": {
+      "page": "settings/settings.html",
+      "chrome_style": false
+  }
 }
