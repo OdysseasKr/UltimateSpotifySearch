@@ -19,15 +19,15 @@ chrome.runtime.onInstalled.addListener(function () {
 	// Opens the first run page
 	chrome.tabs.create({url: "settings/settings.html"});
 
-	// Adds the context menu item
-	chrome.contextMenus.create({
-		id: "spotisearchcontext",
-		title: "Search on Spotify",
-		contexts: ["selection"]
-	});
-
 	// Sets the default setting for the search target
 	chrome.storage.local.set({"ultimateSpotifyButton": 1});
+});
+
+// Adds the context menu item
+chrome.contextMenus.create({
+	id: "spotisearchcontext",
+	title: "Search on Spotify",
+	contexts: ["selection"]
 });
 
 chrome.contextMenus.onClicked.addListener(function (info, tab) {
