@@ -63,19 +63,19 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 	var soundcloudRegex = RegExp(/.*:\/\/(www\.)?soundcloud\.com.*/);
 	var bandcampRegex = RegExp(/.*:\/\/.*\.bandcamp\.com.*/);
 	if (youtubeRegex.test(taburl)) {
-		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery.min.js", runAt:"document_end"}, function () {
+		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery-3.4.1.min.js", runAt:"document_end"}, function () {
 			chrome.tabs.executeScript(tab.id, {file:"js/textfiltering.js", runAt:"document_end"}, function () {
 				chrome.tabs.executeScript(tab.id, {file:"js/youtube.js", runAt:"document_end"});
 			});
 		});
 	} else if (soundcloudRegex.test(taburl)) {
-		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery.min.js", runAt:"document_end"}, function () {
+		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery-3.4.1.min.js", runAt:"document_end"}, function () {
 			chrome.tabs.executeScript(tab.id, {file:"js/textfiltering.js", runAt:"document_end"}, function () {
 				chrome.tabs.executeScript(tab.id, {file:"js/soundcloud.js", runAt:"document_end"});
 			});
 		});
 	} else if (bandcampRegex.test(taburl)) {
-		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery.min.js", runAt:"document_end"}, function () {
+		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery-3.4.1.min.js", runAt:"document_end"}, function () {
 			chrome.tabs.executeScript(tab.id, {file:"js/textfiltering.js", runAt:"document_end"}, function () {
 				chrome.tabs.executeScript(tab.id, {file:"js/bandcamp.js", runAt:"document_end"});
 			});
