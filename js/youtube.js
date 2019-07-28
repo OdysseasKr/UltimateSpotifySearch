@@ -118,7 +118,7 @@ function injectYTMaterialDesign() {
 	})
 	icon.css("width", "100%");
 	try{
-		$(".ytd-video-primary-info-renderer #top-level-buttons").append(spotifyButton);
+		$("#top-level-buttons").append(spotifyButton);
 		setTimeout(function (){
 			spotifyButton.append(anchor);
 			anchor.append(subButton);
