@@ -35,7 +35,7 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
 		if (result.ultimateSpotifyButton == 1) {
 			chrome.tabs.update(tab.id, {url: "spotify:search:\"" + info.selectionText + "\""});
 		} else {
-			chrome.tabs.create({url: "https://open.spotify.com/search/results/" + info.selectionText});
+			chrome.tabs.create({url: "https://open.spotify.com/search/" + info.selectionText});
 		}
 	});
 });
