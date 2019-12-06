@@ -1,5 +1,7 @@
 # Ultimate Spotify Search ![logo](https://raw.githubusercontent.com/OdysseasKr/UltimateSpotifySearch-Chrome/master/icons/icon64.png)
 
+_This extension is no longer maintained, feel free to contribute yourself_
+
 Repository for the Ultimate Spotify Search add-on for Firefox, Chrome and Opera
 
 - Simplifies search on Spotify.
