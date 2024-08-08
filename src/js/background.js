@@ -17,7 +17,7 @@
 // On install
 chrome.runtime.onInstalled.addListener(function () {
 	// Opens the first run page
-	chrome.tabs.create({url: "settings/settings.html"});
+  // chrome.tabs.create({url: "settings/settings.html"});
 
 	// Adds the context menu item
 	chrome.contextMenus.create({
@@ -41,19 +41,15 @@ chrome.contextMenus.onClicked.addListener(function (info, tab) {
 });
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-	// If the message is send by the settings page
-	if (request.target >= 0) {
-		chrome.storage.local.set({"ultimateSpotifyButton": request.target});
-	} else { // If the message is send by a content script
-		chrome.storage.local.get("ultimateSpotifyButton", function (result) {
-			if (result.ultimateSpotifyButton == 1) {
-				chrome.tabs.update(sender.tab.id, {url: "spotify:search:" + request.terms});
-				console.log("spotify:search:\"" + request.terms + "\"")
-			} else {
-				chrome.tabs.create({url: "https://open.spotify.com/search/results/" + request.terms});
-			}
-		});
-	}
+  // If the message is send by a content script
+  chrome.storage.local.get("ultimateSpotifyButton", function (result) {
+    if (result.ultimateSpotifyButton == 1) {
+      chrome.tabs.update(sender.tab.id, {url: "spotify:search:" + request.terms});
+      console.log("spotify:search:\"" + request.terms + "\"")
+    } else {
+      chrome.tabs.create({url: "https://open.spotify.com/search/results/" + request.terms});
+    }
+  });
 });
 
 // New page load listener
