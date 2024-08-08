@@ -2,39 +2,15 @@
 <html>
 	<head>
 		<title>Ultimate Spotify Search</title>
-		<link rel="stylesheet" type="text/css" href="../css/style.css">
-		<link rel="icon" href="../icons/icon16.png" type="image/png" sizes="16x16">
-		<meta charset="UTF-8">
 	</head>
 	<body>
-		<h1>Ultimate Spotify Search</h1>
-		<img class="logo" src="../icons/icon64.png">
-		<div class="settings">
-			<h2>Open search results in:</h2>
-			<form>
-				<input id="desktopTarget" type="radio" name="target">Desktop App<br>
-				<input id="webTarget" type="radio" name="target">Web Player<br>
-			</form>
-
-			<button id="saveButton">Save Changes</button>
-			<p id="notifier">Saved changes</p>
-		</div>
-
-		<h2>Ultimate Spotify Search allows easy search from:</h2>
-		<h4>Youtube</h4>
-		<a href="https://www.youtube.com/watch?v=Ec92Wa8zJs8" target="_blank"><img src="youtube.png"></a> <br>
-		<h4>Soundcloud</h4>
-		<a href="https://soundcloud.com/kygo" target="_blank"><img src="soundcloud.png"></a> <br>
-		<h4>Bandcamp</h4>
-		<a href="https://widekmusic.bandcamp.com" target="_blank"><img src="bandcamp.png"></a> <br>
-
-		<h2>or select any text to search</h2>
-		<img src="context.png"> <br>
-
-		<div id="credit">
-			<h1>Ultimate Spotify Search on
-			<a href="http://github.com/OdysseasKr/ultimateSpotifySearch">Github</a> </h1>
-		</div>
+    <form>
+      <label>Open search results in:</label>
+      <select id="spotifyTarget" name="target">
+        <option value="1">Desktop App</option>
+        <option value="0">Web Player</option>
+      </select>
+    </form>
 		<script src="settings.js"></script>
 	</body>
 </html>
