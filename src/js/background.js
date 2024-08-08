@@ -44,10 +44,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   // If the message is send by a content script
   chrome.storage.local.get("ultimateSpotifyButton", function (result) {
     if (result.ultimateSpotifyButton == 1) {
-      chrome.tabs.update(sender.tab.id, {url: "spotify:search:" + request.terms});
+      chrome.tabs.update(sender.tab.id, {url: "spotify:search:\"" + request.terms + "\""});
       console.log("spotify:search:\"" + request.terms + "\"")
     } else {
-      chrome.tabs.create({url: "https://open.spotify.com/search/results/" + request.terms});
+      chrome.tabs.create({url: "https://open.spotify.com/search/" + request.terms});
     }
   });
 });
