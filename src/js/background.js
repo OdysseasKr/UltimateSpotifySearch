@@ -22,11 +22,10 @@ const searchOnDesktop = (tabId, term) => {
 }
 const searchHandlers = { "web": searchOnWeb, "desktop": searchOnDesktop}
 
-const getStorageAndSearch = (tabId, term) => {
-	chrome.storage.local.get("ultimateSpotifyButton", (result) => {
-    handler = searchHandlers[result.ultimateSpotifyButton];
-    handler(tabId, term)
-	});
+const getStorageAndSearch = async (tabId, term) => {
+	result = await chrome.storage.local.get("ultimateSpotifyButton");
+  handler = searchHandlers[result.ultimateSpotifyButton];
+  handler(tabId, term);
 }
 
 // On install
@@ -55,22 +54,10 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 	var soundcloudRegex = RegExp(/.*:\/\/(www\.)?soundcloud\.com.*/);
 	var bandcampRegex = RegExp(/.*:\/\/.*\.bandcamp\.com.*/);
 	if (youtubeRegex.test(taburl)) {
-		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery.min.js", runAt:"document_end"}, function () {
-			chrome.tabs.executeScript(tab.id, {file:"js/textfiltering.js", runAt:"document_end"}, function () {
-				chrome.tabs.executeScript(tab.id, {file:"js/youtube.js", runAt:"document_end"});
-			});
-		});
+		chrome.scripting.executeScript({target: {tabId: tab.id}, files:["js/lib/jquery.min.js", "js/textfiltering.js", "js/youtube.js"]});
 	} else if (soundcloudRegex.test(taburl)) {
-		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery.min.js", runAt:"document_end"}, function () {
-			chrome.tabs.executeScript(tab.id, {file:"js/textfiltering.js", runAt:"document_end"}, function () {
-				chrome.tabs.executeScript(tab.id, {file:"js/soundcloud.js", runAt:"document_end"});
-			});
-		});
+		chrome.scripting.executeScript({target: {tabId: tab.id}, files:["js/lib/jquery.min.js", "js/textfiltering.js", "js/soundcloud.js"]});
 	} else if (bandcampRegex.test(taburl)) {
-		chrome.tabs.executeScript(tab.id, {file:"js/lib/jquery.min.js", runAt:"document_end"}, function () {
-			chrome.tabs.executeScript(tab.id, {file:"js/textfiltering.js", runAt:"document_end"}, function () {
-				chrome.tabs.executeScript(tab.id, {file:"js/bandcamp.js", runAt:"document_end"});
-			});
-		});
+		chrome.scripting.executeScript({target: {tabId: tab.id}, files:["js/lib/jquery.min.js", "js/textfiltering.js", "js/bandcamp.js"]});
 	}
 });

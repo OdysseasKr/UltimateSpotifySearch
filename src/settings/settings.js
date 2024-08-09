@@ -15,9 +15,12 @@
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
 // Load values
-chrome.storage.local.get("ultimateSpotifyButton", (result) => {
+
+async function initValue() {
+  const result = await chrome.storage.local.get("ultimateSpotifyButton");
   document.querySelector("#spotifyTarget").value = result.ultimateSpotifyButton;
-});
+}
+initValue();
 
 // Save changes on button click
 document.querySelector("#spotifyTarget").addEventListener("change", (e) => {
