@@ -60,7 +60,7 @@ function filterText(text) {
 	for (var i = 0; i < PATTERN.length; i++) {
 		text = text.replace(PATTERN[i], "");
 	}
-	text.replace(' ')
+	text = text.replace(/\s+/g, ' ').trim()
 
 	return text;
 }
