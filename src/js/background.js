@@ -32,7 +32,7 @@ const getStorageAndSearch = (tabId, term) => {
 // On install
 chrome.runtime.onInstalled.addListener(() => {
 	// Opens the first run page
-  // chrome.tabs.create({url: "settings/settings.html"});
+  chrome.tabs.create({url: "firstrun/firstrun.html"});
 
 	// Adds the context menu item
 	chrome.contextMenus.create({
