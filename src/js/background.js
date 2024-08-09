@@ -14,6 +14,21 @@
 	You should have received a copy of the GNU General Public License
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
+const searchOnWeb = (tabId, term) => {
+  chrome.tabs.create({url: "https://open.spotify.com/search/" + term});
+}
+const searchOnDesktop = (tabId, term) => {
+  chrome.tabs.update(tabId, {url: "spotify:search" + '"' + term + '"'});
+}
+const searchHandlers = { 0: searchOnWeb, 1: searchOnDesktop}
+
+const getStorageAndSearch = (tabId, term) => {
+	chrome.storage.local.get("ultimateSpotifyButton", function (result) {
+    handler = searchHandlers[result.ultimateSpotifyButton];
+    handler(tabId, term)
+	});
+}
+
 // On install
 chrome.runtime.onInstalled.addListener(function () {
 	// Opens the first run page
@@ -30,27 +45,8 @@ chrome.runtime.onInstalled.addListener(function () {
 	chrome.storage.local.set({"ultimateSpotifyButton": 1});
 });
 
-chrome.contextMenus.onClicked.addListener(function (info, tab) {
-	chrome.storage.local.get("ultimateSpotifyButton", function (result) {
-		if (result.ultimateSpotifyButton == 1) {
-			chrome.tabs.update(tab.id, {url: "spotify:search:\"" + info.selectionText + "\""});
-		} else {
-			chrome.tabs.create({url: "https://open.spotify.com/search/" + info.selectionText});
-		}
-	});
-});
-
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  // If the message is send by a content script
-  chrome.storage.local.get("ultimateSpotifyButton", function (result) {
-    if (result.ultimateSpotifyButton == 1) {
-      chrome.tabs.update(sender.tab.id, {url: "spotify:search:\"" + request.terms + "\""});
-      console.log("spotify:search:\"" + request.terms + "\"")
-    } else {
-      chrome.tabs.create({url: "https://open.spotify.com/search/" + request.terms});
-    }
-  });
-});
+chrome.contextMenus.onClicked.addListener((info, tab) => {getStorageAndSearch(tab.id, info.selectionText)});
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {getStorageAndSearch(sender.tab.id, request.terms)});
 
 // New page load listener
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
