@@ -17,17 +17,17 @@
 var soundcloudAdded = false;
 
 soundcloudButton();
-var observer = new MutationObserver(function(mutations) {
+var observer = new MutationObserver((mutations) => {
 	if (!soundcloudAdded) {
 		soundcloudAdded = true;
-		setTimeout(function(){soundcloudButton();}, 1000);
+		setTimeout(() => {soundcloudButton();}, 1000);
 	}
 });
 observer.observe(document.getElementById("content"), { subtree: true, childList: true });
 
 // Adds the button on soundcloud
 function soundcloudButton() {
-	$('.soundTitle__title').each(function(i, obj) {
+	$('.soundTitle__title').each((i, obj) => {
 		if ($(obj).parent().find(".spotifyButton").length == 0) {
 			var text = $(obj).find("span:first-child").text();
 			spotifyButton(text).insertAfter(obj);
@@ -55,7 +55,7 @@ function spotifyButton(text) {
     "background-color": "#8dbe00",
 	});
 
-	element.on("click", function (e) {
+	element.on("click", (e) => {
 		openURI(text);
 	})
 

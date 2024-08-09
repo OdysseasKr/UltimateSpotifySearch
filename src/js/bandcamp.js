@@ -38,7 +38,7 @@ function spotifyButton(text) {
     "background-color": "#8dbe00",
 	});
 
-	element.on("click", function (e) {
+	element.on("click", (e) => {
 		openURI(text);
 	});
 

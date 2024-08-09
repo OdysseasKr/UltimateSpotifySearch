@@ -23,14 +23,14 @@ const searchOnDesktop = (tabId, term) => {
 const searchHandlers = { "web": searchOnWeb, "desktop": searchOnDesktop}
 
 const getStorageAndSearch = (tabId, term) => {
-	chrome.storage.local.get("ultimateSpotifyButton", function (result) {
+	chrome.storage.local.get("ultimateSpotifyButton", (result) => {
     handler = searchHandlers[result.ultimateSpotifyButton];
     handler(tabId, term)
 	});
 }
 
 // On install
-chrome.runtime.onInstalled.addListener(function () {
+chrome.runtime.onInstalled.addListener(() => {
 	// Opens the first run page
   // chrome.tabs.create({url: "settings/settings.html"});
 
@@ -49,7 +49,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {getStorageAndSearch(ta
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {getStorageAndSearch(sender.tab.id, request.terms)});
 
 // New page load listener
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 	var taburl = tab.url;
 	var youtubeRegex = RegExp(/.*:\/\/(www\.)?youtube\.com\/watch.*/);
 	var soundcloudRegex = RegExp(/.*:\/\/(www\.)?soundcloud\.com.*/);

@@ -15,12 +15,11 @@
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
 // Check which design is used
-console.log("HERE I AM")
-setTimeout(function () {
+setTimeout(() => {
   injectButton();
-  document.addEventListener('transitionend', function(e) {
+  document.addEventListener('transitionend', (e) => {
     if (e.target.id === 'progress')
-      setTimeout(function () {
+      setTimeout(() => {
         injectButton();
       },1000);
   });
@@ -45,19 +44,19 @@ const createButton = (text) => {
     "top": "0",
 	});
 
-  element.on("click", function () {
+  element.on("click", () => {
     openURI(filterText(text));
   });
 	return element;
 }
 
-function injectButton() {
+const injectButton = () => {
 	if ($(".watch-active-metadata #title").length == 0)
 	  return;
   if ($(".spotifyButton").length != 0)
     return;
 
-  spotifyButton = createButton($(".watch-active-metadata #title:first").text())
+  const spotifyButton = createButton($(".watch-active-metadata #title:first").text())
 	try{
 		$(".watch-active-metadata #title").append(spotifyButton);
 	} catch(e) {
