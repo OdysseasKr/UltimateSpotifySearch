@@ -14,6 +14,12 @@
 	You should have received a copy of the GNU General Public License
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
+
+const WEBSITES = [
+  {"pattern": RegExp(/.*:\/\/(www\.)?youtube\.com\/watch.*/), "file": "js/youtube.js"},
+  {"pattern": RegExp(/.*:\/\/(www\.)?soundcloud\.com.*/), "file": "js/soundcloud.js"},
+  {"pattern": RegExp(/.*:\/\/.*\.bandcamp\.com.*/), "file": "js/bandcamp.js"},
+];
 const searchOnWeb = (tabId, term) => {
   chrome.tabs.create({url: "https://open.spotify.com/search/" + term});
 }
@@ -49,15 +55,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {getStor
 
 // New page load listener
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-	var taburl = tab.url;
-	var youtubeRegex = RegExp(/.*:\/\/(www\.)?youtube\.com\/watch.*/);
-	var soundcloudRegex = RegExp(/.*:\/\/(www\.)?soundcloud\.com.*/);
-	var bandcampRegex = RegExp(/.*:\/\/.*\.bandcamp\.com.*/);
-	if (youtubeRegex.test(taburl)) {
-		chrome.scripting.executeScript({target: {tabId: tab.id}, files:["js/lib/jquery.min.js", "js/textfiltering.js", "js/youtube.js"]});
-	} else if (soundcloudRegex.test(taburl)) {
-		chrome.scripting.executeScript({target: {tabId: tab.id}, files:["js/lib/jquery.min.js", "js/textfiltering.js", "js/soundcloud.js"]});
-	} else if (bandcampRegex.test(taburl)) {
-		chrome.scripting.executeScript({target: {tabId: tab.id}, files:["js/lib/jquery.min.js", "js/textfiltering.js", "js/bandcamp.js"]});
-	}
+  for (const website of WEBSITES) {
+    if (website.pattern.test(tab.url)) {
+      chrome.scripting.executeScript({
+        target: {tabId: tab.id},
+        files:["js/lib/jquery.min.js", "js/textfiltering.js", website.file]
+      });
+      break;
+    }
+  }
 });
