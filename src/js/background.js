@@ -20,7 +20,7 @@ const searchOnWeb = (tabId, term) => {
 const searchOnDesktop = (tabId, term) => {
   chrome.tabs.update(tabId, {url: "spotify:search" + '"' + term + '"'});
 }
-const searchHandlers = { 0: searchOnWeb, 1: searchOnDesktop}
+const searchHandlers = { "web": searchOnWeb, "desktop": searchOnDesktop}
 
 const getStorageAndSearch = (tabId, term) => {
 	chrome.storage.local.get("ultimateSpotifyButton", function (result) {
@@ -42,7 +42,7 @@ chrome.runtime.onInstalled.addListener(function () {
 	});
 
 	// Sets the default setting for the search target
-	chrome.storage.local.set({"ultimateSpotifyButton": 1});
+	chrome.storage.local.set({"ultimateSpotifyButton": "desktop"});
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {getStorageAndSearch(tab.id, info.selectionText)});
