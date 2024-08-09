@@ -15,7 +15,7 @@
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
 var PATTERN = [
-	/[!@#$%^:;"'<>?/|\~`1234567890]/g,
+	/[!@#$%^&:;"'<>?/|\~`1234567890\.,\-\n]/g,
 	/official/ig,
 	/video/ig,
 	/live/ig,
@@ -43,10 +43,6 @@ var PATTERN = [
 	/radio/ig,
 	/edit/ig,
 	/remix/ig,
-	/\n/g,
-	/\./g,
-	/-/g,
-	/&/g,
 	"amp",
 	/\(.*?\)/g,
 	/\[.*?\]/g,
