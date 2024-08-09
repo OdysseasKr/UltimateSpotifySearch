@@ -1,18 +1,15 @@
 # Ultimate Spotify Search ![logo](https://raw.githubusercontent.com/OdysseasKr/UltimateSpotifySearch-Chrome/master/src/icons/icon64.png)
 
-_This extension is no longer maintained, feel free to contribute yourself_
+_This extension is not updated frequently, feel free to contribute yourself_
 
-Repository for the Ultimate Spotify Search add-on for Firefox, Chrome and Opera
+Repository for the Ultimate Spotify Search add-on for Firefox and Opera (Chrome took it down)
 
 - Simplifies search on Spotify.
 - Adds launchers on Youtube, Soundcloud, Bandcamp.
 - Allows search using right-click.
 - Shows results on either desktop app or web player.
 
-Chrome Webstore:
-https://chrome.google.com/webstore/detail/ultimate-spotify-search/onfokaolkiohldbhglpekajglkhijhlf
-
-Firefox Add-ons (Not compatible with Youtube Material Design yet):
+Firefox Add-ons:
 https://addons.mozilla.org/en-US/firefox/addon/ultimate-spotify-search/
 
 Opera Add-ons:
