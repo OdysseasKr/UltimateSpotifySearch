@@ -24,7 +24,7 @@ const searchOnWeb = (tabId, term) => {
   chrome.tabs.create({url: "https://open.spotify.com/search/" + term});
 }
 const searchOnDesktop = (tabId, term) => {
-  chrome.tabs.update(tabId, {url: "spotify:search" + '"' + term + '"'});
+  chrome.tabs.update(tabId, {url: "spotify:search:" + '"' + term + '"'});
 }
 const searchHandlers = { "web": searchOnWeb, "desktop": searchOnDesktop}
 
