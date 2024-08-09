@@ -40,7 +40,7 @@ function soundcloudButton() {
 
 function spotifyButton(text) {
 	var element = $("<div></div>", {
-		text: "Search on Spotify",
+		text: "Spotify Search",
 		class: "spotifyButton",
 	});
 
@@ -52,7 +52,7 @@ function spotifyButton(text) {
 		"border-radius": "3px",
 		"padding": "0.25em",
 		"margin": "0.25em",
-		"width": "calc(17 * 0.5em)"
+    "background-color": "#8dbe00",
 	});
 
 	element.on("click", function (e) {
