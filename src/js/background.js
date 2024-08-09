@@ -22,11 +22,10 @@ const searchOnDesktop = (tabId, term) => {
 }
 const searchHandlers = { "web": searchOnWeb, "desktop": searchOnDesktop}
 
-const getStorageAndSearch = (tabId, term) => {
-	chrome.storage.local.get("ultimateSpotifyButton", (result) => {
-    handler = searchHandlers[result.ultimateSpotifyButton];
-    handler(tabId, term)
-	});
+const getStorageAndSearch = async (tabId, term) => {
+	result = await chrome.storage.local.get("ultimateSpotifyButton");
+  handler = searchHandlers[result.ultimateSpotifyButton];
+  handler(tabId, term);
 }
 
 // On install
