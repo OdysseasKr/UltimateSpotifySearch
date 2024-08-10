@@ -15,7 +15,7 @@
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
 const PATTERN = [
-  /[!@#$%^&:;"'<>?/|\~`1234567890\.,\-\n]/g,
+  /[!@#$%^&:;"'<>?/|~`1234567890.,\-\n]/g,
   /official/gi,
   /video/gi,
   /live/gi,

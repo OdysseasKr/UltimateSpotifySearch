@@ -35,8 +35,8 @@ const searchOnDesktop = (tabId, term) => {
 const searchHandlers = { web: searchOnWeb, desktop: searchOnDesktop };
 
 const getStorageAndSearch = async (tabId, term) => {
-  result = await chrome.storage.local.get("ultimateSpotifyButton");
-  handler = searchHandlers[result.ultimateSpotifyButton];
+  const result = await chrome.storage.local.get("ultimateSpotifyButton");
+  const handler = searchHandlers[result.ultimateSpotifyButton];
   handler(tabId, term);
 };
 
