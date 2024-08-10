@@ -1,4 +1,4 @@
-# Ultimate Spotify Search ![logo](https://raw.githubusercontent.com/OdysseasKr/UltimateSpotifySearch-Chrome/master/src/icons/icon64.png)
+# Ultimate Spotify Search ![logo](https://raw.githubusercontent.com/OdysseasKr/UltimateSpotifySearch-Chrome/main/src/icons/icon64.png)
 
 _This extension is not updated frequently, feel free to contribute yourself_
 
