@@ -14,50 +14,54 @@
 	You should have received a copy of the GNU General Public License
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
-var soundcloudAdded = false;
+let soundcloudAdded = false;
 
 soundcloudButton();
-var observer = new MutationObserver((mutations) => {
-	if (!soundcloudAdded) {
-		soundcloudAdded = true;
-		setTimeout(() => {soundcloudButton();}, 1000);
-	}
+const observer = new MutationObserver((mutations) => {
+  if (!soundcloudAdded) {
+    soundcloudAdded = true;
+    setTimeout(() => {
+      soundcloudButton();
+    }, 1000);
+  }
 });
-observer.observe(document.getElementById("content"), { subtree: true, childList: true });
+observer.observe(document.getElementById("content"), {
+  subtree: true,
+  childList: true,
+});
 
 // Adds the button on soundcloud
 function soundcloudButton() {
-	$('.soundTitle__title').each((i, obj) => {
-		if ($(obj).parent().find(".spotifyButton").length == 0) {
-			var text = $(obj).find("span:first-child").text();
-			spotifyButton(text).insertAfter(obj);
-		}
-	});
+  $(".soundTitle__title").each((i, obj) => {
+    if ($(obj).parent().find(".spotifyButton").length == 0) {
+      const text = $(obj).find("span:first-child").text();
+      spotifyButton(text).insertAfter(obj);
+    }
+  });
 
-	soundcloudAdded = false;
+  soundcloudAdded = false;
 }
 
-
 function spotifyButton(text) {
-	var element = $("<div></div>", {
-		text: "Spotify Search",
-		class: "spotifyButton",
-	});
+  const element = $("<div></div>", {
+    text: "Spotify Search",
+    class: "spotifyButton",
+  });
 
-	element.css({
-		"cursor": "pointer",
-		"display": "inline-block",
-		"font-size": "0.7em",
-		"border": "1px solid #8dbe00",
-		"border-radius": "3px",
-		"padding": "0.25em",
-		"margin": "0.25em",
+  element.css({
+    cursor: "pointer",
+    display: "inline-block",
+    "font-size": "0.7em",
+    border: "1px solid #8dbe00",
+    "border-radius": "3px",
+    padding: "0.25em",
+    margin: "0.25em",
     "background-color": "#8dbe00",
-	});
+  });
 
-	element.on("click", (e) => {
-		openURI(text);
-	})
+  element.on("click", (e) => {
+    openURI(text);
+  });
 
-	return element;
+  return element;
 }

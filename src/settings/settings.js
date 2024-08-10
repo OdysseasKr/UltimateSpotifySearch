@@ -24,6 +24,5 @@ initValue();
 
 // Save changes on button click
 document.querySelector("#spotifyTarget").addEventListener("change", (e) => {
-  chrome.storage.local.set({"ultimateSpotifyButton": e.target.value});
+  chrome.storage.local.set({ ultimateSpotifyButton: e.target.value });
 });
-

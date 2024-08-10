@@ -17,49 +17,48 @@
 // Check which design is used
 setTimeout(() => {
   injectButton();
-  document.addEventListener('transitionend', (e) => {
-    if (e.target.id === 'progress')
+  document.addEventListener("transitionend", (e) => {
+    if (e.target.id === "progress")
       setTimeout(() => {
         injectButton();
-      },1000);
+      }, 1000);
   });
 }, 2000);
 
-
 const createButton = (text) => {
-	const element = $("<div></div>", {
-		text: "Spotify Search",
-		class: "spotifyButton",
-	});
-	element.css({
-		"cursor": "pointer",
-		"display": "inline-block",
-		"font-size": "1.4rem",
-		"border": "0.4rem solid #8dbe00",
-		"border-radius": "18px",
-		"padding": "0.15rem",
+  const element = $("<div></div>", {
+    text: "Spotify Search",
+    class: "spotifyButton",
+  });
+  element.css({
+    cursor: "pointer",
+    display: "inline-block",
+    "font-size": "1.4rem",
+    border: "0.4rem solid #8dbe00",
+    "border-radius": "18px",
+    padding: "0.15rem",
     "background-color": "#8dbe00",
-    "position": "absolute",
-    "right": "0",
-    "top": "0",
-	});
+    position: "absolute",
+    right: "0",
+    top: "0",
+  });
 
   element.on("click", () => {
     openURI(filterText(text));
   });
-	return element;
-}
+  return element;
+};
 
 const injectButton = () => {
-	if ($(".watch-active-metadata #title").length == 0)
-	  return;
-  if ($(".spotifyButton").length != 0)
-    return;
+  if ($(".watch-active-metadata #title").length == 0) return;
+  if ($(".spotifyButton").length != 0) return;
 
-  const spotifyButton = createButton($(".watch-active-metadata #title:first").text())
-	try{
-		$(".watch-active-metadata #title").append(spotifyButton);
-	} catch(e) {
-    console.log("Error injecting spotify button", e)
-	}
-}
+  const spotifyButton = createButton(
+    $(".watch-active-metadata #title:first").text(),
+  );
+  try {
+    $(".watch-active-metadata #title").append(spotifyButton);
+  } catch (e) {
+    console.log("Error injecting spotify button", e);
+  }
+};

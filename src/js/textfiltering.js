@@ -14,56 +14,56 @@
 	You should have received a copy of the GNU General Public License
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
-var PATTERN = [
-	/[!@#$%^&:;"'<>?/|\~`1234567890\.,\-\n]/g,
-	/official/ig,
-	/video/ig,
-	/live/ig,
-	/acoustic/ig,
-	/lyrics/ig,
-	/lyric/ig,
-	/hd/ig,
-	/quality/ig,
-	/720p/ig,
-	/1080p/ig,
-	/cover/ig,
-	/guitar/ig,
-	/drum/ig,
-	/band/ig,
-	/vocals/ig,
-	/vocal/ig,
-	/vs/ig,
-	/feat/ig,
-	/ft/ig,
-	/full/ig,
-	/album/ig,
-	/streaming/ig,
-	/stream/ig,
-	/extended/ig,
-	/radio/ig,
-	/edit/ig,
-	/remix/ig,
-	"amp",
-	/\(.*?\)/g,
-	/\[.*?\]/g,
-	/\{.*?\}/g
+const PATTERN = [
+  /[!@#$%^&:;"'<>?/|\~`1234567890\.,\-\n]/g,
+  /official/gi,
+  /video/gi,
+  /live/gi,
+  /acoustic/gi,
+  /lyrics/gi,
+  /lyric/gi,
+  /hd/gi,
+  /quality/gi,
+  /720p/gi,
+  /1080p/gi,
+  /cover/gi,
+  /guitar/gi,
+  /drum/gi,
+  /band/gi,
+  /vocals/gi,
+  /vocal/gi,
+  /vs/gi,
+  /feat/gi,
+  /ft/gi,
+  /full/gi,
+  /album/gi,
+  /streaming/gi,
+  /stream/gi,
+  /extended/gi,
+  /radio/gi,
+  /edit/gi,
+  /remix/gi,
+  "amp",
+  /\(.*?\)/g,
+  /\[.*?\]/g,
+  /\{.*?\}/g,
 ];
 
 /*
  * Filters the given string using PATTERN
  */
 function filterText(text) {
-	for (var i = 0; i < PATTERN.length; i++) {
-		text = text.replace(PATTERN[i], "");
-	}
-	text = text.replace(/\s+/g, ' ').trim()
+  for (let i = 0; i < PATTERN.length; i++) {
+    text = text.replace(PATTERN[i], "");
+  }
+  text = text.replace(/\s+/g, " ").trim();
 
-	return text;
+  return text;
 }
 
 /*
  * Opens the Spotify search uri using the given terms
  */
 function openURI(term) {
-	chrome.runtime.sendMessage({terms: term});
+  chrome.runtime.sendMessage({ terms: term });
 }

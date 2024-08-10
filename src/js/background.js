@@ -16,50 +16,60 @@
 */
 
 const WEBSITES = [
-  {"pattern": RegExp(/.*:\/\/(www\.)?youtube\.com\/watch.*/), "file": "js/youtube.js"},
-  {"pattern": RegExp(/.*:\/\/(www\.)?soundcloud\.com.*/), "file": "js/soundcloud.js"},
-  {"pattern": RegExp(/.*:\/\/.*\.bandcamp\.com.*/), "file": "js/bandcamp.js"},
+  {
+    pattern: RegExp(/.*:\/\/(www\.)?youtube\.com\/watch.*/),
+    file: "js/youtube.js",
+  },
+  {
+    pattern: RegExp(/.*:\/\/(www\.)?soundcloud\.com.*/),
+    file: "js/soundcloud.js",
+  },
+  { pattern: RegExp(/.*:\/\/.*\.bandcamp\.com.*/), file: "js/bandcamp.js" },
 ];
 const searchOnWeb = (tabId, term) => {
-  chrome.tabs.create({url: "https://open.spotify.com/search/" + term});
-}
+  chrome.tabs.create({ url: "https://open.spotify.com/search/" + term });
+};
 const searchOnDesktop = (tabId, term) => {
-  chrome.tabs.update(tabId, {url: "spotify:search:" + '"' + term + '"'});
-}
-const searchHandlers = { "web": searchOnWeb, "desktop": searchOnDesktop}
+  chrome.tabs.update(tabId, { url: "spotify:search:" + '"' + term + '"' });
+};
+const searchHandlers = { web: searchOnWeb, desktop: searchOnDesktop };
 
 const getStorageAndSearch = async (tabId, term) => {
-	result = await chrome.storage.local.get("ultimateSpotifyButton");
+  result = await chrome.storage.local.get("ultimateSpotifyButton");
   handler = searchHandlers[result.ultimateSpotifyButton];
   handler(tabId, term);
-}
+};
 
 // On install
 chrome.runtime.onInstalled.addListener(() => {
-	// Opens the first run page
-  chrome.tabs.create({url: "firstrun/firstrun.html"});
+  // Opens the first run page
+  chrome.tabs.create({ url: "firstrun/firstrun.html" });
 
-	// Adds the context menu item
-	chrome.contextMenus.create({
-		id: "spotisearchcontext",
-		title: "Search on Spotify",
-		contexts: ["selection"]
-	});
+  // Adds the context menu item
+  chrome.contextMenus.create({
+    id: "spotisearchcontext",
+    title: "Search on Spotify",
+    contexts: ["selection"],
+  });
 
-	// Sets the default setting for the search target
-	chrome.storage.local.set({"ultimateSpotifyButton": "desktop"});
+  // Sets the default setting for the search target
+  chrome.storage.local.set({ ultimateSpotifyButton: "desktop" });
 });
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {getStorageAndSearch(tab.id, info.selectionText)});
-chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {getStorageAndSearch(sender.tab.id, request.terms)});
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  getStorageAndSearch(tab.id, info.selectionText);
+});
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  getStorageAndSearch(sender.tab.id, request.terms);
+});
 
 // New page load listener
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   for (const website of WEBSITES) {
     if (website.pattern.test(tab.url)) {
       chrome.scripting.executeScript({
-        target: {tabId: tab.id},
-        files:["js/lib/jquery.min.js", "js/textfiltering.js", website.file]
+        target: { tabId: tab.id },
+        files: ["js/lib/jquery.min.js", "js/textfiltering.js", website.file],
       });
       break;
     }
