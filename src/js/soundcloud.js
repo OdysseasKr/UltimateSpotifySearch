@@ -14,21 +14,23 @@
 	You should have received a copy of the GNU General Public License
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
-let soundcloudAdded = false;
+const soundcloudAdded = false;
 
-soundcloudButton();
-const observer = new MutationObserver((mutations) => {
-  if (!soundcloudAdded) {
-    soundcloudAdded = true;
-    setTimeout(() => {
-      soundcloudButton();
-    }, 1000);
-  }
-});
-observer.observe(document.getElementById("content"), {
-  subtree: true,
-  childList: true,
-});
+setTimeout(()=>{
+  soundcloudButton();
+  var observer = new MutationObserver((mutations) => {
+    if (!soundcloudAdded) {
+      soundcloudAdded = true;
+      setTimeout(() => {
+        soundcloudButton();
+      }, 1000);
+    }
+  });
+  observer.observe(document.getElementById("content"), {
+    subtree: true,
+    childList: true,
+  });
+}, 2000);
 
 // Adds the button on soundcloud
 function soundcloudButton() {
