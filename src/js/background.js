@@ -69,7 +69,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (website.pattern.test(tab.url)) {
       chrome.scripting.executeScript({
         target: { tabId: tab.id },
-        files: ["js/lib/jquery.min.js", "js/textfiltering.js", website.file],
+        files: ["js/lib/jquery.min.js", "js/common.js", website.file],
       });
       break;
     }
