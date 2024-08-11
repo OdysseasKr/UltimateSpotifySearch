@@ -1,6 +1,6 @@
 {
   "name": "Ultimate Spotify Search",
-  "version": "3.0",
+  "version": "5.0",
   "manifest_version": 3,
   "description": "Simplifies search on Spotify with launchers on popular sites and search from right-click",
 
@@ -29,5 +29,11 @@
 
   "options_ui": {
     "page": "settings/settings.html"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "spotifyonyoutube@odysseasnotepad.wordpress.com"
+    }
   }
 }
