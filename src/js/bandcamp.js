@@ -14,33 +14,34 @@
 	You should have received a copy of the GNU General Public License
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
-var text = $("#band-name-location span.title").text();
+const text = $("#band-name-location span.title").text();
 
 if ($("#band-name-location .spotifyButton").length == 0)
-    $("#band-name-location").append(spotifyButton(text));
+  $("#band-name-location").append(spotifyButton(text));
 
 function spotifyButton(text) {
-	var element = $("<div></div>", {
-		text: "Search on Spotify",
-		class: "spotifyButton",
-	});
+  const element = $("<div></div>", {
+    text: "Spotify Search",
+    class: "spotifyButton",
+  });
 
-	element.data("term", text);
+  element.data("term", text);
 
-	element.css({
-		"cursor": "pointer",
-		"display": "inline-block",
-		"font-size": "1em",
-		"border": "2px solid #8dbe00",
-		"border-radius": "3px",
-		"padding": "0.25em",
-		"margin": "0.25em",
-		"width": "calc(17 * 0.5em)"
-	});
+  element.css({
+    cursor: "pointer",
+    display: "inline-block",
+    "font-size": "1em",
+    border: "2px solid #8dbe00",
+    "border-radius": "3px",
+    padding: "0.25em",
+    margin: "0.25em",
+    "background-color": "#8dbe00",
+  });
 
-	element.on("click", function (e) {
-		openURI(text);
-	});
+  element.on("click", () => {
+    openURI(text);
+  });
 
-	return element;
+  return element;
 }
+undefined;

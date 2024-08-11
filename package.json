@@ -1,0 +1,27 @@
+{
+  "name": "ultimatespotifysearch",
+  "version": "3.0.0",
+  "description": "Simplifies search on Spotify with launchers on popular sites and search from right-click",
+  "scripts": {
+    "build": "cd src && zip -r ../ultimatespotifysearch.zip *",
+    "clean": "rm ultimatespotifysearch.zip",
+    "prettier": "prettier src/**/*.js --write"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OdysseasKr/UltimateSpotifySearch.git"
+  },
+  "author": "OdysseasKr",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/OdysseasKr/UltimateSpotifySearch/issues"
+  },
+  "homepage": "https://github.com/OdysseasKr/UltimateSpotifySearch#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "eslint": "^9.9.0",
+    "globals": "^15.9.0",
+    "jslint": "^0.12.1",
+    "prettier": "^3.3.3"
+  }
+}

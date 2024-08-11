@@ -1,0 +1,33 @@
+{
+  "name": "Ultimate Spotify Search",
+  "version": "3.0",
+  "manifest_version": 3,
+  "description": "Simplifies search on Spotify with launchers on popular sites and search from right-click",
+
+  "permissions": [
+    "contextMenus",
+    "scripting",
+    "storage"
+  ],
+
+  "host_permissions": [
+    "https://*.youtube.com/*",
+    "https://*.soundcloud.com/*",
+    "https://*.bandcamp.com/*"
+  ],
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "background" : {
+    "service_worker": "js/background.js",
+    "scripts": ["js/background.js"]
+  },
+
+  "options_ui": {
+    "page": "settings/settings.html"
+  }
+}

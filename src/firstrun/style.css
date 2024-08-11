@@ -1,0 +1,33 @@
+body {
+    background-color: #EEEFED;
+    color: #2B2E34;
+    text-align: center;
+}
+
+img {
+    border: 2px solid #7CC646;
+    border-radius: 20px;
+    height: 80%;
+    margin: 5px;
+}
+
+p {
+    margin: 0px;
+    padding: 0px;
+}
+
+a:link {
+    color: #579926;
+    font-weight: bold;
+}
+
+a:visited {
+    color: #579926;
+    font-weight: bold;
+}
+
+#settingsiframe {
+    width: 500px;
+    height: 100px;
+    border: 0px;
+}
