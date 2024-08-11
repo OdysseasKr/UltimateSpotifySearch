@@ -14,26 +14,31 @@
 	You should have received a copy of the GNU General Public License
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
-let soundcloudAdded = false;
-
-setTimeout(()=>{
+let lock = false;
+async function main() {
+  await sleep(2000);
   soundcloudButton();
-  var observer = new MutationObserver((mutations) => {
-    if (!soundcloudAdded) {
-      soundcloudAdded = true;
-      setTimeout(() => {
-        soundcloudButton();
-      }, 1000);
-    }
+  await createObserverForNewTracks();
+}
+main();
+
+async function createObserverForNewTracks() {
+  const observer = new MutationObserver(async () => {
+    await sleep(1000);
+    soundcloudButton();
   });
   observer.observe(document.getElementById("content"), {
     subtree: true,
     childList: true,
   });
-}, 2000);
+}
 
 // Adds the button on soundcloud
 function soundcloudButton() {
+  if (lock) return;
+
+  lock = true;
+
   $(".soundTitle__title").each((i, obj) => {
     if ($(obj).parent().find(".spotifyButton").length == 0) {
       const text = $(obj).find("span:first-child").text();
@@ -41,7 +46,7 @@ function soundcloudButton() {
     }
   });
 
-  soundcloudAdded = false;
+  lock = false;
 }
 
 function spotifyButton(text) {

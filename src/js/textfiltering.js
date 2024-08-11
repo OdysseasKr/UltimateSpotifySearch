@@ -67,3 +67,10 @@ function filterText(text) {
 function openURI(term) {
   chrome.runtime.sendMessage({ terms: term });
 }
+
+/*
+ * Sleeps in async way
+ */
+function sleep(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
