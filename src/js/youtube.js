@@ -16,11 +16,11 @@
 */
 // Check which design is used
 setTimeout(() => {
-  injectButton();
+  periodicInjector();
   document.addEventListener("transitionend", (e) => {
     if (e.target.id === "progress")
       setTimeout(() => {
-        injectButton();
+        periodicInjector();
       }, 1000);
   });
 }, 2000);
@@ -44,21 +44,30 @@ const createButton = (text) => {
   });
 
   element.on("click", () => {
+    const text = $(".watch-active-metadata #title h1").text();
     openURI(filterText(text));
   });
   return element;
 };
 
-const injectButton = () => {
-  if ($(".watch-active-metadata #title").length == 0) return;
-  if ($(".spotifyButton").length != 0) return;
+function periodicInjector() {
+  const interval = setInterval(() => {
+    if (injectButton()) {
+      clearInterval(interval);
+    }
+  }, 1000);
+}
 
-  const spotifyButton = createButton(
-    $(".watch-active-metadata #title:first").text(),
-  );
+const injectButton = () => {
+  if ($(".watch-active-metadata #title").length == 0) return false;
+  if ($(".spotifyButton").length != 0) return true;
+
+  const spotifyButton = createButton();
   try {
     $(".watch-active-metadata #title").append(spotifyButton);
+    return false;
   } catch (e) {
     console.log("Error injecting spotify button", e);
   }
+  return false;
 };
