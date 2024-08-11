@@ -14,16 +14,17 @@
 	You should have received a copy of the GNU General Public License
 	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
-// Check which design is used
-setTimeout(() => {
+
+async function main() {
+  await sleep(2000);
   periodicInjector();
-  document.addEventListener("transitionend", (e) => {
+  document.addEventListener("transitionend", async (e) => {
     if (e.target.id === "progress")
-      setTimeout(() => {
-        periodicInjector();
-      }, 1000);
+      await sleep(1000);
+      periodicInjector();
   });
-}, 2000);
+}
+main();
 
 const createButton = (text) => {
   const element = $("<div></div>", {
