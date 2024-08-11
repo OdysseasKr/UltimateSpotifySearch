@@ -11,31 +11,9 @@ img {
     margin: 5px;
 }
 
-form {
-    width: 150px;
-    text-align: left;
-    margin: auto;
-}
-
 p {
     margin: 0px;
     padding: 0px;
-}
-
-#notifier {
-    color: #579926;
-    font-weight: bold;
-    font-size: 1.2em;
-    opacity: 0;
-}
-
-#saveButton {
-    margin: 10px 0px;
-}
-
-#credit {
-    width: 500px;
-    margin: 10px auto;
 }
 
 a:link {
@@ -48,15 +26,8 @@ a:visited {
     font-weight: bold;
 }
 
-.logo {
+#settingsiframe {
+    width: 500px;
+    height: 100px;
     border: 0px;
-    border-radius: 0px;
-    height: 100%
-}
-
-.settings {
-    border: 2px solid #7CC646;
-    border-radius: 20px;
-    width: 400px;
-    margin: auto;
 }
