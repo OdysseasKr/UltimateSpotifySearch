@@ -65,7 +65,7 @@ const injectButton = () => {
 
   const spotifyButton = createButton();
   try {
-    $(".watch-active-metadata #title").append(spotifyButton);
+    $(".watch-active-metadata #title.style-scope.ytd-watch-metadata").append(spotifyButton);
     return false;
   } catch (e) {
     console.log("Error injecting spotify button", e);
