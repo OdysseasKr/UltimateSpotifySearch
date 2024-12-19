@@ -1,6 +1,6 @@
 {
   "name": "ultimatespotifysearch",
-  "version": "3.0.0",
+  "version": "5.1",
   "description": "Simplifies search on Spotify with launchers on popular sites and search from right-click",
   "scripts": {
     "build": "cd src && zip -r ../ultimatespotifysearch.zip *",

@@ -1,18 +1,18 @@
 /*
-	This file is part of Ultimate Spotify Search.
+  This file is part of Ultimate Spotify Search.
 
-	Ultimate Spotify Search is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
+  Ultimate Spotify Search is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
 
-	Ultimate Spotify Search is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
+  Ultimate Spotify Search is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
 
-	You should have received a copy of the GNU General Public License
-	along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
+  You should have received a copy of the GNU General Public License
+  along with Ultimate Spotify Search.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 const WEBSITES = [
@@ -41,9 +41,11 @@ const getStorageAndSearch = async (tabId, term) => {
 };
 
 // On install
-chrome.runtime.onInstalled.addListener(() => {
+chrome.runtime.onInstalled.addListener((details) => {
   // Opens the first run page
-  chrome.tabs.create({ url: "firstrun/firstrun.html" });
+  if (details.reason == chrome.runtime.OnInstalledReason.UPDATE || details.reason == chrome.runtime.OnInstalledReason.INSTALL) {
+    chrome.tabs.create({ url: "firstrun/firstrun.html" });
+  }
 
   // Adds the context menu item
   chrome.contextMenus.create({
@@ -53,7 +55,9 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 
   // Sets the default setting for the search target
-  chrome.storage.local.set({ ultimateSpotifyButton: "desktop" });
+  if (details.reason == chrome.runtime.OnInstalledReason.INSTALL) {
+    chrome.storage.local.set({ ultimateSpotifyButton: "desktop" });
+  }
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
